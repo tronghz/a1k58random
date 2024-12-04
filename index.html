@@ -9,170 +9,174 @@
 <head>
     <meta charset="UTF-8">
     <title>A1K58 Member Random</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --background-start: #667eea;
-            --background-end: #764ba2;
-            --text-color: #ffffff;
-            --card-background: rgba(255, 255, 255, 0.1);
+            --bg-light: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            --card-bg: white;
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --text-dark: #1f2937;
+            --shadow: rgba(0,0,0,0.1);
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', sans-serif;
+            box-sizing: border-box;
         }
 
         body {
-            background: linear-gradient(135deg, var(--background-start), var(--background-end));
-            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            perspective: 1000px;
         }
 
         .container {
+            max-width: 1200px;
             width: 100%;
-            max-width: 900px;
+            margin: 0 auto;
             padding: 20px;
         }
 
-        .number-groups {
-            display: flex;
-            gap: 30px;
+        .random-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .group {
-            flex: 1;
-            background: var(--card-background);
-            border-radius: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 16px;
+            padding: 25px;
             backdrop-filter: blur(10px);
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 25px var(--shadow);
+            transition: all 0.3s ease;
         }
 
         .group:hover {
-            transform: scale(1.02) rotateX(5deg);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        h2 {
+        .group-title {
             text-align: center;
-            margin-bottom: 25px;
-            color: var(--text-color);
-            font-weight: 300;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
         }
 
         .result-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
-            min-height: 200px;
-            margin-bottom: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
             flex-wrap: wrap;
+            gap: 15px;
+            min-height: 150px;
+            background-color: rgba(241, 245, 249, 0.7);
+            border-radius: 12px;
+            margin-bottom: 20px;
             padding: 15px;
         }
 
         .result-number {
+            width: 80px;
+            height: 80px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            width: 120px;
-            height: 120px;
-            border-radius: 20px;
-            font-size: 2.5rem;
-            font-weight: 700;
+            align-items: center;
+            background-color: var(--primary-color);
             color: white;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            margin: 10px;
-            transition: all 0.3s ease;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(59,130,246,0.3);
         }
 
         .button-group {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        .button-group button {
-            padding: 15px 25px;
+        .btn {
+            padding: 10px 20px;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .select-btn {
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background-color: var(--primary-color);
+            color: white;
         }
 
         .reset-btn {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background-color: #ef4444;
+            color: white;
         }
 
-        .button-group button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
 
         .available-numbers {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            max-height: 250px;
+            background-color: rgba(243, 244, 246, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            max-height: 150px;
             overflow-y: auto;
-            font-size: 1rem;
-            border: 2px dashed rgba(255, 255, 255, 0.3);
+            font-size: 0.9rem;
         }
 
-        @media (max-width: 768px) {
-            .number-groups {
-                flex-direction: column;
+        @media (max-width: 600px) {
+            .random-groups {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
-
 <body>
     <div class="container">
-        <div class="number-groups">
+        <div class="random-groups">
             <div class="group">
-                <h2>Lên bảng Làm Bài</h2>
+                <h2 class="group-title">Làm Bài</h2>
                 <div id="resultA" class="result-container"></div>
                 <div class="button-group">
-                    <button class="select-btn" onclick="selectNumbers('A', 1)">Chọn 1 Số</button>
-                    <button class="select-btn" onclick="selectNumbers('A', 2)">Chọn 2 Số</button>
-                    <button class="select-btn" onclick="selectNumbers('A', 3)">Chọn 3 Số</button>
-                    <button class="select-btn" onclick="selectNumbers('A', 4)">Chọn 4 Số</button>
-                    <button class="reset-btn" onclick="resetGroup('A')">Reset</button>
+                    <button class="btn select-btn" onclick="selectNumbers('A', 1)">Chọn 1</button>
+                    <button class="btn select-btn" onclick="selectNumbers('A', 2)">Chọn 2</button>
+                    <button class="btn select-btn" onclick="selectNumbers('A', 3)">Chọn 3</button>
+                    <button class="btn select-btn" onclick="selectNumbers('A', 4)">Chọn 4</button>
+                    <button class="btn reset-btn" onclick="resetGroup('A')">Reset</button>
                 </div>
                 <div id="availableA" class="available-numbers"></div>
             </div>
 
             <div class="group">
-                <h2>Lên bảng Chấm Điểm</h2>
+                <h2 class="group-title">Chấm Điểm</h2>
                 <div id="resultB" class="result-container"></div>
                 <div class="button-group">
-                    <button class="select-btn" onclick="selectNumbers('B', 1)">Chọn 1 Số</button>
-                    <button class="select-btn" onclick="selectNumbers('B', 2)">Chọn 2 Số</button>
-                    <button class="select-btn" onclick="selectNumbers('B', 3)">Chọn 3 Số</button>
-                    <button class="select-btn" onclick="selectNumbers('B', 4)">Chọn 4 Số</button>
-                    <button class="reset-btn" onclick="resetGroup('B')">Reset</button>
+                    <button class="btn select-btn" onclick="selectNumbers('B', 1)">Chọn 1</button>
+                    <button class="btn select-btn" onclick="selectNumbers('B', 2)">Chọn 2</button>
+                    <button class="btn select-btn" onclick="selectNumbers('B', 3)">Chọn 3</button>
+                    <button class="btn select-btn" onclick="selectNumbers('B', 4)">Chọn 4</button>
+                    <button class="btn reset-btn" onclick="resetGroup('B')">Reset</button>
                 </div>
                 <div id="availableB" class="available-numbers"></div>
             </div>
