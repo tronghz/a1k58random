@@ -1,85 +1,72 @@
 <!DOCTYPE html>
 <html lang="vi">
 <meta property="og:title" content="A1K58 Member Random">
-<meta property="og:description" content="Ứng dụng chọn số ngẫu nhiên cho nhóm A1K58">
-<meta property="og:image" content="https://drive.google.com/file/d/1U0xWKwZBrt-W9TQWNF1a5fRMJKGgfOAb/view?usp=sharing">
+<meta property="og:description" content="Ứng dụng chọn ngẫu nhiên by A1K58">
+<meta property="og:image" content="random.webp">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 
 <head>
     <meta charset="UTF-8">
-    <title>A1K58 Random</title>
+    <title>A1K58 Member Random</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4a90e2;
+            --primary-color: #3498db;
             --secondary-color: #2ecc71;
-            --background-color: #f4f6f9;
-            --card-background: #ffffff;
-            --text-color: #2c3e50;
-            --accent-color-a: #3498db;
-            --accent-color-b: #e74c3c;
+            --background-start: #667eea;
+            --background-end: #764ba2;
+            --text-color: #ffffff;
+            --card-background: rgba(255, 255, 255, 0.1);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif;
         }
 
         body {
-            background-color: var(--background-color);
+            background: linear-gradient(135deg, var(--background-start), var(--background-end));
             color: var(--text-color);
-            line-height: 1.6;
-            background-image:
-                linear-gradient(45deg, rgba(74, 144, 226, 0.1) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(74, 144, 226, 0.1) 25%, transparent 25%);
-            background-size: 50px 50px;
-            animation: wave-animation 20s linear infinite;
-        }
-
-        @keyframes wave-animation {
-            0% {
-                background-position: 0 0, 0 0;
-            }
-
-            100% {
-                background-position: 100px 100px, 100px 100px;
-            }
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
         }
 
         .container {
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: 3rem;
-            margin-bottom: 40px;
+            max-width: 900px;
+            padding: 20px;
         }
 
         .number-groups {
             display: flex;
-            flex-direction: column;
             gap: 30px;
         }
 
         .group {
-            background-color: white;
+            flex: 1;
+            background: var(--card-background);
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
             padding: 30px;
-            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
 
-        .group h2 {
+        .group:hover {
+            transform: scale(1.02) rotateX(5deg);
+        }
+
+        h2 {
             text-align: center;
             margin-bottom: 25px;
-            color: var(--primary-color);
-            font-size: 2.5rem;
+            color: var(--text-color);
+            font-weight: 300;
         }
 
         .result-container {
@@ -89,7 +76,7 @@
             gap: 15px;
             min-height: 200px;
             margin-bottom: 25px;
-            background-color: #f8f9fa;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             flex-wrap: wrap;
             padding: 15px;
@@ -99,15 +86,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border-radius: 20px;
-            font-size: 3rem;
-            font-weight: bold;
+            font-size: 2.5rem;
+            font-weight: 700;
             color: white;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             margin: 10px;
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .button-group {
@@ -119,64 +106,43 @@
         }
 
         .button-group button {
-            padding: 20px 30px;
+            padding: 15px 25px;
             border: none;
             border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 1.5rem;
-            transition: all 0.2s ease;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            transition: all 0.3s ease;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .select-btn {
-            background: linear-gradient(135deg, var(--accent-color-a), #2980b9);
-            color: white;
+            background: linear-gradient(135deg, #3498db, #2980b9);
         }
 
         .reset-btn {
-            background: linear-gradient(135deg, var(--accent-color-b), #c0392b);
-            color: white;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .button-group button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .available-numbers {
-            background-color: #f1f3f5;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 20px;
             max-height: 250px;
             overflow-y: auto;
-            font-size: 1.3rem;
-            border: 3px dashed var(--primary-color);
-            word-break: break-all;
+            font-size: 1rem;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
         }
 
-        @media (max-width: 600px) {
-            body {
-                font-size: 16px;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .group h2 {
-                font-size: 2rem;
-            }
-
-            .result-number {
-                width: 120px;
-                height: 120px;
-                font-size: 2.5rem;
-            }
-
-            .button-group button {
-                padding: 15px 25px;
-                font-size: 1.2rem;
-            }
-
-            .available-numbers {
-                font-size: 1rem;
+        @media (max-width: 768px) {
+            .number-groups {
+                flex-direction: column;
             }
         }
     </style>
@@ -184,8 +150,6 @@
 
 <body>
     <div class="container">
-        <h1 style="text-align: center; color: var(--primary-color);">A1K58 Member Random</h1>
-
         <div class="number-groups">
             <div class="group">
                 <h2>Lên bảng Làm Bài</h2>
@@ -217,19 +181,13 @@
 
     <script>
         const GroupManager = {
-            A: {
-                available: [],
-                selected: []
-            },
-            B: {
-                available: [],
-                selected: []
-            },
+            A: { available: [], selected: [] },
+            B: { available: [], selected: [] },
 
             init: function (group) {
                 this[group].available = Array.from(
                     { length: 47 },
-                    (_, i) => `${group.toLowerCase()}${(i + 1).toString().padStart(2, '0')}`
+                    (_, i) => `${(i + 1).toString().padStart(2, '0')}`
                 );
                 this[group].selected = [];
                 this.updateAvailableDisplay(group);
@@ -245,39 +203,40 @@
 
             selectNumbers: function (group, count) {
                 const resultEl = document.getElementById(`result${group}`);
-
-                // Xóa kết quả cũ và hiển thị loading
                 resultEl.innerHTML = '';
-                const loadingEl = document.createElement('div');
-                loadingEl.className = 'result-number';
-                loadingEl.textContent = '...';
-                loadingEl.style.background = group === 'A'
+
+                if (this[group].available.length < count) {
+                    alert(`Không đủ số trong nhóm ${group}`);
+                    return;
+                }
+
+                // Hiệu ứng random
+                const randomAnimationEl = document.createElement('div');
+                randomAnimationEl.className = 'result-number';
+                randomAnimationEl.textContent = '...';
+                randomAnimationEl.style.background = group === 'A'
                     ? 'linear-gradient(135deg, #3498db, #2980b9)'
                     : 'linear-gradient(135deg, #e74c3c, #c0392b)';
-                resultEl.appendChild(loadingEl);
+                resultEl.appendChild(randomAnimationEl);
 
-                // Delay kết quả
+                // Tạo hiệu ứng random
+                const randomNumbers = [];
+                const animationInterval = setInterval(() => {
+                    randomAnimationEl.textContent = Math.floor(Math.random() * 100);
+                }, 50);
+
+                // Dừng và hiển thị kết quả sau 1.5 giây
                 setTimeout(() => {
-                    // Xóa loading
-                    resultEl.innerHTML = '';
+                    clearInterval(animationInterval);
+                    resultEl.innerHTML = ''; // Xóa hiệu ứng random
 
-                    // Kiểm tra số lượng
-                    if (this[group].available.length < count) {
-                        alert(`Không đủ số trong nhóm ${group}`);
-                        return;
-                    }
-
-                    // Chọn số
-                    const selectedNumbers = [];
                     for (let i = 0; i < count; i++) {
-                        // Chọn số ngẫu nhiên
                         const randomIndex = Math.floor(
                             Math.random() * this[group].available.length
                         );
                         const selectedNumber =
                             this[group].available.splice(randomIndex, 1)[0];
 
-                        // Tạo phần tử hiển thị
                         const numberEl = document.createElement('div');
                         numberEl.className = 'result-number';
                         numberEl.textContent = selectedNumber;
@@ -285,63 +244,34 @@
                             ? 'linear-gradient(135deg, #3498db, #2980b9)'
                             : 'linear-gradient(135deg, #e74c3c, #c0392b)';
 
-                        // Hiệu ứng xuất hiện từng số
                         numberEl.style.opacity = '0';
                         numberEl.style.transform = 'scale(0.5)';
                         resultEl.appendChild(numberEl);
 
-                        // Animate xuất hiện
                         setTimeout(() => {
                             numberEl.style.transition = 'all 0.5s ease';
                             numberEl.style.opacity = '1';
                             numberEl.style.transform = 'scale(1)';
                         }, i * 300);
 
-                        // Lưu số đã chọn
-                        selectedNumbers.push(selectedNumber);
+                        this[group].selected.push(selectedNumber);
                     }
 
-                    // Cập nhật danh sách đã chọn
-                    this[group].selected.push(...selectedNumbers);
-
-                    // Cập nhật hiển thị
                     this.updateAvailableDisplay(group);
-
-                    // Phát âm thanh
-                    const selectSound = new Audio('data:audio/wav;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwAASAN4nGNgYGBkYGTcnc9iCAMBEIFyYXx//z8exPr///wPC+XzGSBaQPD/v4PofAZ6EPT//38QbRDtxyBGEP3wgykClgIA5RQPtg==');
-                    selectSound.volume = 0.3;
-                    selectSound.play();
-                }, 1500); // Delay 1.5 giây
+                }, 1500);
             },
 
             reset: function (group) {
                 if (confirm(`Bạn muốn reset nhóm ${group}?`)) {
-                    // Xóa kết quả
                     document.getElementById(`result${group}`).innerHTML = '';
-
-                    // Khởi tạo lại
                     this.init(group);
-
-                    // Hiệu ứng reset
-                    const groupEl = document.querySelector(`.group:nth-child(${group === 'A' ? '1' : '2'})`);
-                    groupEl.style.transform = 'scale(0.9)';
-                    setTimeout(() => {
-                        groupEl.style.transform = 'scale(1)';
-                    }, 200);
-
-                    // Phát âm thanh reset
-                    const resetSound = new Audio('data:audio/wav;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwAASAN4nGNgYGBkYGTcnc9iCAMBEIFyYXx//z8exPr///wPC+XzGSBaQPD/v4PofAZ6EPT//38QbRDtxyBGEP3wgykClgIA5RQPtg==');
-                    resetSound.volume = 0.5;
-                    resetSound.play();
                 }
             }
         };
 
-        // Khởi tạo ban đầu
         GroupManager.init('A');
         GroupManager.init('B');
 
-        // Hàm toàn cục
         function selectNumbers(group, count) {
             GroupManager.selectNumbers(group, count);
         }
@@ -349,9 +279,8 @@
         function resetGroup(group) {
             GroupManager.reset(group);
         }
-        // Cảnh báo khi reload trang
         window.addEventListener('beforeunload', function (e) {
-            e.preventDefault(); // Hiển thị hộp thoại cảnh báo
+            e.preventDefault();
             e.returnValue = '⚠️ Toàn bộ dữ liệu sẽ bị mất nếu bạn tải lại trang. Bạn có chắc chắn muốn tiếp tục?';
         });
     </script>
