@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>A1K58 Random</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #2ecc71;
+            --background-color: #f4f6f9;
+            --card-background: #ffffff;
+            --text-color: #2c3e50;
+            --accent-color-a: #3498db;
+            --accent-color-b: #e74c3c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image:
+                linear-gradient(45deg, rgba(74, 144, 226, 0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(74, 144, 226, 0.1) 25%, transparent 25%);
+            background-size: 50px 50px;
+            animation: wave-animation 20s linear infinite;
+        }
+
+        @keyframes wave-animation {
+            0% {
+                background-position: 0 0, 0 0;
+            }
+
+            100% {
+                background-position: 100px 100px, 100px 100px;
+            }
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .number-groups {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .group {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 500px;
+            transition: all 0.3s ease;
+        }
+
+        .group:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .group h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .result-container {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            min-height: 100px;
+            margin-bottom: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .result-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .result-number:hover {
+            transform: scale(1.05);
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .button-group button {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .select-btn {
+            background: linear-gradient(135deg, var(--accent-color-a), #2980b9);
+            color: white;
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, var(--accent-color-b), #c0392b);
+            color: white;
+        }
+
+        .button-group button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .available-numbers {
+            background-color: #f1f3f5;
+            border-radius: 10px;
+            padding: 1rem;
+            max-height: 120px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            border: 2px dashed var(--primary-color);
+        }
+
+        @media screen and (max-width: 768px) {
+            .number-groups {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: var(--primary-color);">A1K58 Member Random</h1>
+
+        <div class="number-groups">
+            <div class="group">
+                <h2>Lên bảng Làm Bài</h2>
+                <div id="resultA" class="result-container"></div>
+                <div class="button-group">
+                    <button class="select-btn" onclick="selectNumbers('A', 1)">Chọn 1 Số</button>
+                    <button class="select-btn" onclick="selectNumbers('A', 2)">Chọn 2 Số</button>
+                    <button class="select-btn" onclick="selectNumbers('A', 3)">Chọn 3 Số</button>
+                    <button class="select-btn" onclick="selectNumbers('A', 4)">Chọn 4 Số</button>
+                    <button class="reset-btn" onclick="resetGroup('A')">Reset</button>
+                </div>
+                <div id="availableA" class="available-numbers"></div>
+            </div>
+
+            <div class="group">
+                <h2>Lên bảng Chấm Điểm</h2>
+                <div id="resultB" class="result-container"></div>
+                <div class="button-group">
+                    <button class="select-btn" onclick="selectNumbers('B', 1)">Chọn 1 Số</button>
+                    <button class="select-btn" onclick="selectNumbers('B', 2)">Chọn 2 Số</button>
+                    <button class="select-btn" onclick="selectNumbers('B', 3)">Chọn 3 Số</button>
+                    <button class="select-btn" onclick="selectNumbers('B', 4)">Chọn 4 Số</button>
+                    <button class="reset-btn" onclick="resetGroup('B')">Reset</button>
+                </div>
+                <div id="availableB" class="available-numbers"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GroupManager = {
+            A: {
+                available: [],
+                selected: []
+            },
+            B: {
+                available: [],
+                selected: []
+            },
+
+            init: function (group) {
+                this[group].available = Array.from(
+                    { length: 47 },
+                    (_, i) => `${group.toLowerCase()}${(i + 1).toString().padStart(2, '0')}`
+                );
+                this[group].selected = [];
+                this.updateAvailableDisplay(group);
+            },
+
+            updateAvailableDisplay: function (group) {
+                const availableEl = document.getElementById(`available${group}`);
+                if (availableEl) {
+                    availableEl.textContent =
+                        `Số chưa chọn: ${this[group].available.join(', ')}`;
+                }
+            },
+
+            selectNumbers: function (group, count) {
+                const resultEl = document.getElementById(`result${group}`);
+
+                // Xóa kết quả cũ và hiển thị loading
+                resultEl.innerHTML = '';
+                const loadingEl = document.createElement('div');
+                loadingEl.className = 'result-number';
+                loadingEl.textContent = '...';
+                loadingEl.style.background = group === 'A'
+                    ? 'linear-gradient(135deg, #3498db, #2980b9)'
+                    : 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                resultEl.appendChild(loadingEl);
+
+                // Delay kết quả
+                setTimeout(() => {
+                    // Xóa loading
+                    resultEl.innerHTML = '';
+
+                    // Kiểm tra số lượng
+                    if (this[group].available.length < count) {
+                        alert(`Không đủ số trong nhóm ${group}`);
+                        return;
+                    }
+
+                    // Chọn số
+                    const selectedNumbers = [];
+                    for (let i = 0; i < count; i++) {
+                        // Chọn số ngẫu nhiên
+                        const randomIndex = Math.floor(
+                            Math.random() * this[group].available.length
+                        );
+                        const selectedNumber =
+                            this[group].available.splice(randomIndex, 1)[0];
+
+                        // Tạo phần tử hiển thị
+                        const numberEl = document.createElement('div');
+                        numberEl.className = 'result-number';
+                        numberEl.textContent = selectedNumber;
+                        numberEl.style.background = group === 'A'
+                            ? 'linear-gradient(135deg, #3498db, #2980b9)'
+                            : 'linear-gradient(135deg, #e74c3c, #c0392b)';
+
+                        // Hiệu ứng xuất hiện từng số
+                        numberEl.style.opacity = '0';
+                        numberEl.style.transform = 'scale(0.5)';
+                        resultEl.appendChild(numberEl);
+
+                        // Animate xuất hiện
+                        setTimeout(() => {
+                            numberEl.style.transition = 'all 0.5s ease';
+                            numberEl.style.opacity = '1';
+                            numberEl.style.transform = 'scale(1)';
+                        }, i * 300);
+
+                        // Lưu số đã chọn
+                        selectedNumbers.push(selectedNumber);
+                    }
+
+                    // Cập nhật danh sách đã chọn
+                    this[group].selected.push(...selectedNumbers);
+
+                    // Cập nhật hiển thị
+                    this.updateAvailableDisplay(group);
+
+                    // Phát âm thanh
+                    const selectSound = new Audio('data:audio/wav;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwAASAN4nGNgYGBkYGTcnc9iCAMBEIFyYXx//z8exPr///wPC+XzGSBaQPD/v4PofAZ6EPT//38QbRDtxyBGEP3wgykClgIA5RQPtg==');
+                    selectSound.volume = 0.3;
+                    selectSound.play();
+                }, 1500); // Delay 1.5 giây
+            },
+
+            reset: function (group) {
+                if (confirm(`Bạn muốn reset nhóm ${group}?`)) {
+                    // Xóa kết quả
+                    document.getElementById(`result${group}`).innerHTML = '';
+
+                    // Khởi tạo lại
+                    this.init(group);
+
+                    // Hiệu ứng reset
+                    const groupEl = document.querySelector(`.group:nth-child(${group === 'A' ? '1' : '2'})`);
+                    groupEl.style.transform = 'scale(0.9)';
+                    setTimeout(() => {
+                        groupEl.style.transform = 'scale(1)';
+                    }, 200);
+
+                    // Phát âm thanh reset
+                    const resetSound = new Audio('data:audio/wav;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwAASAN4nGNgYGBkYGTcnc9iCAMBEIFyYXx//z8exPr///wPC+XzGSBaQPD/v4PofAZ6EPT//38QbRDtxyBGEP3wgykClgIA5RQPtg==');
+                    resetSound.volume = 0.5;
+                    resetSound.play();
+                }
+            }
+        };
+
+        // Khởi tạo ban đầu
+        GroupManager.init('A');
+        GroupManager.init('B');
+
+        // Hàm toàn cục
+        function selectNumbers(group, count) {
+            GroupManager.selectNumbers(group, count);
+        }
+
+        function resetGroup(group) {
+            GroupManager.reset(group);
+        }
+        // Cảnh báo khi reload trang
+        window.addEventListener('beforeunload', function (e) {
+            e.preventDefault(); // Hiển thị hộp thoại cảnh báo
+            e.returnValue = '⚠️ Toàn bộ dữ liệu sẽ bị mất nếu bạn tải lại trang. Bạn có chắc chắn muốn tiếp tục?';
+        });
+    </script>
+</body>
+
+</html>
