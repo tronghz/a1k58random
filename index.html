@@ -5,6 +5,8 @@
 <meta property="og:image" content="random.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <head>
     <meta charset="UTF-8">
@@ -12,164 +14,167 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-   --bg-light: linear-gradient(135deg, #e0f2fe, #bae6fd);
-   --card-bg: white;
-   --primary-color: #3b82f6;
-   --secondary-color: #10b981;
-   --text-dark: #1f2937;
-   --shadow: rgba(0,0,0,0.1);
-}
+            --bg-light: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            --primary-color: #3b82f6;
+            --text-dark: #1f2937;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
 
-* {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-   font-family: 'Inter', sans-serif;
-   background: var(--bg-light);
-   background-attachment: fixed;
-   color: var(--text-dark);
-   line-height: 1.6;
-   min-height: 100vh;
-   display: flex;
-   align-items: center;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
 
-.container {
-   max-width: 1200px;
-   width: 100%;
-   margin: 0 auto;
-   padding: 20px;
-}
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
 
-.random-groups {
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-   gap: 20px;
-}
+        .random-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
 
-.group {
-   background: rgba(255,255,255,0.8);
-   border-radius: 16px;
-   padding: 25px;
-   backdrop-filter: blur(10px);
-   box-shadow: 0 10px 25px var(--shadow);
-   transition: all 0.3s ease;
-}
+        .group {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px var(--shadow);
+            transition: all 0.3s ease;
+        }
 
-.group-title {
-   text-align: center;
-   margin-bottom: 20px;
-   font-weight: 600;
-   color: var(--primary-color);
-}
+        .group-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
 
-.result-container {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   flex-wrap: wrap;
-   gap: 15px;
-   min-height: 150px;
-   background-color: rgba(241, 245, 249, 0.7);
-   border-radius: 12px;
-   margin-bottom: 20px;
-   padding: 15px;
-}
+        .result-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            min-height: 150px;
+            background-color: rgba(241, 245, 249, 0.7);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
 
-.result-number {
-   width: 80px;
-   height: 80px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   background-color: var(--primary-color);
-   color: white;
-   border-radius: 12px;
-   font-size: 2rem;
-   font-weight: 600;
-   box-shadow: 0 5px 15px rgba(59,130,246,0.3);
-}
+        .result-number {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
 
-.button-group {
-   display: flex;
-   justify-content: center;
-   flex-wrap: wrap;
-   gap: 10px;
-   margin-bottom: 20px;
-}
+        .button-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-.btn {
-   padding: 10px 20px;
-   border: none;
-   border-radius: 8px;
-   cursor: pointer;
-   font-weight: 600;
-   transition: all 0.3s ease;
-}
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex-grow: 1;
+        }
 
-.select-btn {
-   background-color: var(--primary-color);
-   color: white;
-}
+        .select-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
 
-.reset-btn {
-   background-color: #ef4444;
-   color: white;
-}
+        .reset-btn {
+            background-color: #ef4444;
+            color: white;
+        }
 
-.btn:hover {
-   opacity: 0.9;
-   transform: translateY(-2px);
-}
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
 
-.available-numbers {
-   background-color: rgba(243, 244, 246, 0.7);
-   border-radius: 12px;
-   padding: 15px;
-   max-height: 150px;
-   overflow-y: auto;
-   font-size: 0.9rem;
-}
+        .available-numbers {
+            background-color: rgba(243, 244, 246, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
 
-@media (max-width: 600px) {
-   .container {
-       padding: 10px;
-   }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+            }
 
-   .random-groups {
-       grid-template-columns: 1fr;
-   }
+            .random-groups {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
 
-   .group {
-       padding: 15px;
-   }
+            .group {
+                padding: 15px;
+            }
 
-   .button-group {
-       flex-direction: column;
-       align-items: stretch;
-   }
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
 
-   .btn {
-       width: 100%;
-       margin-bottom: 5px;
-   }
+            .btn {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 16px;
+            }
 
-   .result-number {
-       width: 60px;
-       height: 60px;
-       font-size: 1.5rem;
-   }
+            .result-number {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
 
-   .available-numbers {
-       max-height: 100px;
-       font-size: 0.8rem;
-   }
-}
+            .available-numbers {
+                max-height: 120px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="random-groups">
