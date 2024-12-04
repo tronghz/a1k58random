@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <meta property="og:title" content="A1K58 Member Random">
-    <meta property="og:description" content="Ứng dụng chọn số ngẫu nhiên cho nhóm A1K58">
-    <meta property="og:image" content="https://drive.google.com/file/d/1U0xWKwZBrt-W9TQWNF1a5fRMJKGgfOAb/view?usp=sharing">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="A1K58 Member Random">
+<meta property="og:description" content="Ứng dụng chọn số ngẫu nhiên cho nhóm A1K58">
+<meta property="og:image" content="https://drive.google.com/file/d/1U0xWKwZBrt-W9TQWNF1a5fRMJKGgfOAb/view?usp=sharing">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 
 <head>
     <meta charset="UTF-8">
@@ -50,84 +50,81 @@
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         h1 {
             text-align: center;
             color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
+            font-size: 3rem;
+            margin-bottom: 40px;
         }
 
         .number-groups {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 30px;
         }
 
         .group {
             background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 30px;
             transition: all 0.3s ease;
-        }
-
-        .group:active {
-            transform: scale(0.98);
         }
 
         .group h2 {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             color: var(--primary-color);
-            font-size: 1.5rem;
+            font-size: 2.5rem;
         }
 
         .result-container {
             display: flex;
-            gap: 10px;
             justify-content: center;
             align-items: center;
-            min-height: 120px;
-            margin-bottom: 15px;
+            gap: 15px;
+            min-height: 200px;
+            margin-bottom: 25px;
             background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 10px;
+            border-radius: 15px;
             flex-wrap: wrap;
+            padding: 15px;
         }
 
         .result-number {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 80px;
-            height: 80px;
-            border-radius: 15px;
-            font-size: 1.5rem;
+            width: 150px;
+            height: 150px;
+            border-radius: 20px;
+            font-size: 3rem;
             font-weight: bold;
             color: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin: 5px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            transition: transform 0.2s ease;
         }
 
         .button-group {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
         .button-group button {
-            padding: 12px 18px;
+            padding: 20px 30px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1.5rem;
             transition: all 0.2s ease;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
@@ -143,32 +140,43 @@
             color: white;
         }
 
-        .button-group button:active {
-            transform: scale(0.95);
-            opacity: 0.8;
-        }
-
         .available-numbers {
             background-color: #f1f3f5;
-            border-radius: 10px;
-            padding: 10px;
-            max-height: 150px;
+            border-radius: 15px;
+            padding: 20px;
+            max-height: 250px;
             overflow-y: auto;
-            font-size: 0.9rem;
-            border: 2px dashed var(--primary-color);
+            font-size: 1.3rem;
+            border: 3px dashed var(--primary-color);
             word-break: break-all;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
+            body {
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .group h2 {
+                font-size: 2rem;
+            }
+
             .result-number {
-                width: 90px;
-                height: 90px;
-                font-size: 1.8rem;
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
             }
 
             .button-group button {
-                padding: 10px 15px;
-                font-size: 0.8rem;
+                padding: 15px 25px;
+                font-size: 1.2rem;
+            }
+
+            .available-numbers {
+                font-size: 1rem;
             }
         }
     </style>
