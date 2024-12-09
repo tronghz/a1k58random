@@ -172,10 +172,64 @@
                 font-size: 0.9rem;
             }
         }
+
+        .sound-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            background-color: #2563eb;
+            transform: scale(1.1);
+        }
+
+        .sound-toggle.muted {
+            background-color: #ef4444;
+        }
+
+        .fullscreen-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-toggle:hover {
+            background-color: #2563eb;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 
 <body>
+    <button id="soundToggle" class="sound-toggle">🔊</button>
+    <button id="fullscreenToggle" class="fullscreen-toggle">🖥️</button>
     <div class="container">
         <div class="random-groups">
             <div class="group">
@@ -207,6 +261,31 @@
     </div>
 
     <script>
+        const soundToggle = document.getElementById('soundToggle');
+        let isSoundEnabled = true;
+
+        soundToggle.addEventListener('click', function () {
+            isSoundEnabled = !isSoundEnabled;
+
+            if (isSoundEnabled) {
+                soundToggle.textContent = '🔊';
+                soundToggle.classList.remove('muted');
+            } else {
+                soundToggle.textContent = '🔇';
+                soundToggle.classList.add('muted');
+            }
+        });
+        // Tạo âm thanh spin
+        const spinSound = new Audio('spin.mp3');
+        // const selectSound = new Audio('spin.mp3');
+
+        function playSoundIfEnabled(sound) {
+            if (isSoundEnabled) {
+                sound.currentTime = 0;
+                sound.play();
+            }
+        }
+
         const GroupManager = {
             A: { available: [], selected: [] },
             B: { available: [], selected: [] },
@@ -236,6 +315,10 @@
                     alert(`Không đủ số trong nhóm ${group}`);
                     return;
                 }
+
+                // Phát âm thanh spin
+                spinSound.currentTime = 0;
+                playSoundIfEnabled(spinSound);
 
                 // Hiệu ứng random
                 const randomAnimationEl = document.createElement('div');
@@ -279,6 +362,10 @@
                             numberEl.style.transition = 'all 0.5s ease';
                             numberEl.style.opacity = '1';
                             numberEl.style.transform = 'scale(1)';
+
+                            // Phát âm thanh chọn số
+                            selectSound.currentTime = 0;
+                            playSoundIfEnabled(selectSound);
                         }, i * 300);
 
                         this[group].selected.push(selectedNumber);
@@ -306,6 +393,44 @@
         function resetGroup(group) {
             GroupManager.reset(group);
         }
+
+        const fullscreenToggle = document.getElementById('fullscreenToggle');
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                    document.documentElement.msRequestFullscreen();
+                }
+                fullscreenToggle.textContent = '🗝️';
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { // Firefox
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { // IE/Edge
+                    document.msExitFullscreen();
+                }
+                fullscreenToggle.textContent = '🖥️';
+            }
+        }
+
+        fullscreenToggle.addEventListener('click', toggleFullScreen);
+
+        document.addEventListener('fullscreenchange', function () {
+            if (!document.fullscreenElement) {
+                fullscreenToggle.textContent = '🖥️';
+            } else {
+                fullscreenToggle.textContent = '🗝️';
+            }
+        });
+
         window.addEventListener('beforeunload', function (e) {
             e.preventDefault();
             e.returnValue = '⚠️ Toàn bộ dữ liệu sẽ bị mất nếu bạn tải lại trang. Bạn có chắc chắn muốn tiếp tục?';
