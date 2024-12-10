@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-    --bg-light: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    --bg-light: linear-gradient(135deg, #bae1fb, #52bbf3);
     --primary-color: #3b82f6;
     --text-dark: #1f2937;
     --shadow: rgba(0, 0, 0, 0.1);
@@ -133,6 +133,7 @@ body {
     max-height: 150px;
     overflow-y: auto;
     font-size: 0.9rem;
+    border: 2px dashed var(--primary-color); /* Thêm viền nét đứt xung quanh */
 }
 
 .sound-toggle, .fullscreen-toggle {
@@ -203,10 +204,6 @@ body {
         font-size: 1.8rem;
     }
 
-    .available-numbers {
-        max-height: 120px;
-        font-size: 0.9rem;
-    }
 
     .sound-toggle, .fullscreen-toggle {
         width: 35px;
@@ -294,7 +291,7 @@ body {
                 const availableEl = document.getElementById(`available${group}`);
                 if (availableEl) {
                     availableEl.textContent =
-                        `Số chưa chọn: ${this[group].available.join(', ')}`;
+                        `Nạn nhân tiếp theo: ${this[group].available.join(', ')}`;
                 }
             },
 
