@@ -14,208 +14,509 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-    --bg-light: linear-gradient(135deg, #bae1fb, #52bbf3);
-    --primary-color: #3b82f6;
-    --text-dark: #1f2937;
-    --shadow: rgba(0, 0, 0, 0.1);
-}
+            --bg-light: linear-gradient(135deg, #79e5fd, #6a8cfd);
+            --primary-color: #3b82f6;
+            --text-dark: #1f2937;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-light);
-    background-attachment: fixed;
-    color: var(--text-dark);
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
 
-.container {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-}
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
 
-.random-groups {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
+        .random-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
 
-.group {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 16px;
-    padding: 25px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 25px var(--shadow);
-    transition: all 0.3s ease;
-}
+        .group {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px var(--shadow);
+            transition: all 0.3s ease;
+        }
 
-.group-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: 600;
-    color: var(--primary-color);
-}
+        .group-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
 
-.result-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    min-height: 150px;
-    background-color: rgba(241, 245, 249, 0.7);
-    border-radius: 12px;
-    margin-bottom: 20px;
-    padding: 15px;
-}
+        .result-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            min-height: 150px;
+            background-color: rgba(241, 245, 249, 0.7);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
 
-.result-number {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 12px;
-    font-size: 2rem;
-    font-weight: 600;
-    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-}
+        .result-number {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
 
-.button-group {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
+        .button-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    flex-grow: 1;
-}
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex-grow: 1;
+        }
 
-.select-btn {
-    background-color: var(--primary-color);
-    color: white;
-}
+        .select-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
 
-.reset-btn {
-    background-color: #ef4444;
-    color: white;
-}
+        .reset-btn {
+            background-color: #ef4444;
+            color: white;
+        }
 
-.btn:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-}
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
 
-.available-numbers {
-    background-color: rgba(243, 244, 246, 0.7);
-    border-radius: 12px;
-    padding: 15px;
-    max-height: 150px;
-    overflow-y: auto;
-    font-size: 0.9rem;
-    border: 2px dashed var(--primary-color); /* Thêm viền nét đứt xung quanh */
-}
+        .available-numbers {
+            background-color: rgba(243, 244, 246, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            border: 2px dashed var(--primary-color);
+            /* Thêm viền nét đứt xung quanh */
+        }
 
-.sound-toggle, .fullscreen-toggle {
+        .sound-toggle,
+        .fullscreen-toggle {
+            position: fixed;
+            z-index: 9999;
+            top: 10px;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover,
+        .fullscreen-toggle:hover {
+            background-color: #2563eb;
+            transform: scale(1.1);
+        }
+
+        .sound-toggle.muted {
+            background-color: #ef4444;
+        }
+
+        .sound-toggle {
+            right: 10px;
+        }
+
+        .fullscreen-toggle {
+            left: 10px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+            }
+
+            .random-groups {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .group {
+                padding: 15px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+
+            .result-number {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+
+
+            .sound-toggle,
+            .fullscreen-toggle {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+                top: 5px;
+            }
+        }
+
+        /* Thêm vào sau phần CSS hiện có, trước dấu } cuối cùng của thẻ style */
+
+        .btn {
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .select-btn {
+            background: linear-gradient(135deg, #4f46e5, #3b82f6);
+            border: 2px solid transparent;
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+
+        .reset-btn:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
+        }
+
+        .btn:active::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: ripple 0.6s linear;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: translate(-50%, -50%) scale(4);
+                opacity: 0;
+            }
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        @media (hover: hover) {
+            .btn:hover {
+                opacity: 0.9;
+            }
+        }
+
+        .group-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .result-number {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3),
+                    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            }
+
+            to {
+                box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5),
+                    inset 0 1px 4px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        .available-numbers {
+            background-color: rgba(243, 244, 246, 0.8);
+            border-radius: 12px;
+            padding: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            border: 2px dashed var(--primary-color);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            color: #1f2937;
+            font-weight: 500;
+            line-height: 1.6;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Màu khác cho nhóm B */
+        .group:nth-child(2) .result-number {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .group:nth-child(2) .result-number {
+            animation: glowRed 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowRed {
+            from {
+                box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3),
+                    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            }
+
+            to {
+                box-shadow: 0 8px 25px rgba(239, 68, 68, 0.5),
+                    inset 0 1px 4px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        /* Hiệu ứng hover cho số */
+        .result-number:hover {
+            transform: translateY(-2px);
+            transition: transform 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .result-number {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+
+            .group-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .group-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .group-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg,
+                    rgba(59, 130, 246, 0) 0%,
+                    rgba(59, 130, 246, 0.8) 50%,
+                    rgba(59, 130, 246, 0) 100%);
+            animation: underlineAnimation 2s infinite;
+        }
+
+        @keyframes underlineAnimation {
+            0% {
+                transform: scaleX(0.7);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scaleX(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scaleX(0.7);
+                opacity: 0.5;
+            }
+        }
+
+        /* Màu khác cho tiêu đề của nhóm thứ 2 */
+        .group:nth-child(2) .group-title::after {
+            background: linear-gradient(90deg,
+                    rgba(239, 68, 68, 0) 0%,
+                    rgba(239, 68, 68, 0.8) 50%,
+                    rgba(239, 68, 68, 0) 100%);
+        }
+
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1em;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            z-index: 1;
+            pointer-events: none;
+            user-select: none;
+            animation: snowfall linear infinite;
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-10vh) translateX(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        .header {
     position: fixed;
-    z-index: 9999;
-    top: 10px;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(186, 225, 251, 0.9), rgba(82, 187, 243, 0.9));
+    padding: 15px 0;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
 }
 
-.sound-toggle:hover, .fullscreen-toggle:hover {
-    background-color: #2563eb;
-    transform: scale(1.1);
+        .main-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(135deg, #2563eb, #3b82f6, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 2px;
 }
 
-.sound-toggle.muted {
-    background-color: #ef4444;
+/* Điều chỉnh container chính để không bị che bởi header */
+.container {
+    margin-top: 100px;
 }
 
-.sound-toggle {
-    right: 10px;
-}
-
-.fullscreen-toggle {
-    left: 10px;
-}
-
+/* Điều chỉnh responsive */
 @media (max-width: 600px) {
-    body {
-        padding: 10px;
-        align-items: flex-start;
-    }
-
-    .random-groups {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .group {
-        padding: 15px;
-    }
-
-    .button-group {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 12px 20px;
-        font-size: 16px;
-    }
-
-    .result-number {
-        width: 70px;
-        height: 70px;
+    .main-title {
         font-size: 1.8rem;
     }
-
-
-    .sound-toggle, .fullscreen-toggle {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-        top: 5px;
+    
+    .container {
+        margin-top: 80px;
     }
 }
+
     </style>
 </head>
 
 <body>
+    <div class="header">
+        <h1 class="main-title">Random A1K58</h1>
+    </div>
     <button id="soundToggle" class="sound-toggle">🔊</button>
     <button id="fullscreenToggle" class="fullscreen-toggle">🖥️</button>
     <div class="container">
@@ -263,9 +564,8 @@ body {
                 soundToggle.classList.add('muted');
             }
         });
-        // Tạo âm thanh spin
+
         const spinSound = new Audio('spin.mp3');
-        // const selectSound = new Audio('spin.mp3');
 
         function playSoundIfEnabled(sound) {
             if (isSoundEnabled) {
@@ -274,24 +574,78 @@ body {
             }
         }
 
+        // Thêm StorageManager để quản lý localStorage
+        const StorageManager = {
+            saveData: function (data) {
+                const saveObject = {
+                    data: data,
+                    timestamp: new Date().getTime(),
+                    expiryDays: 3
+                };
+                localStorage.setItem('randomNumberData', JSON.stringify(saveObject));
+            },
+
+            loadData: function () {
+                const savedData = localStorage.getItem('randomNumberData');
+                if (savedData) {
+                    const parsed = JSON.parse(savedData);
+                    const now = new Date().getTime();
+                    const daysDiff = (now - parsed.timestamp) / (1000 * 60 * 60 * 24);
+
+                    if (daysDiff <= parsed.expiryDays) {
+                        return parsed.data;
+                    } else {
+                        localStorage.removeItem('randomNumberData');
+                    }
+                }
+                return null;
+            },
+
+            clearData: function () {
+                localStorage.removeItem('randomNumberData');
+            }
+        };
+
         const GroupManager = {
             A: { available: [], selected: [] },
             B: { available: [], selected: [] },
 
-            init: function (group) {
-                this[group].available = Array.from(
-                    { length: 47 },
-                    (_, i) => `${(i + 1).toString().padStart(2, '0')}`
-                );
-                this[group].selected = [];
-                this.updateAvailableDisplay(group);
+            init: function (group, forceReset = false) {
+                if (!forceReset) {
+                    const savedData = StorageManager.loadData();
+                    if (savedData) {
+                        this.A = savedData.A;
+                        this.B = savedData.B;
+                        this.updateAvailableDisplay('A');
+                        this.updateAvailableDisplay('B');
+                        return;
+                    }
+                }
+
+                if (group) {
+                    this[group].available = Array.from(
+                        { length: 47 },
+                        (_, i) => `${(i + 1).toString().padStart(2, '0')}`
+                    );
+                    this[group].selected = [];
+                    this.updateAvailableDisplay(group);
+                } else {
+                    ['A', 'B'].forEach(g => {
+                        this[g].available = Array.from(
+                            { length: 47 },
+                            (_, i) => `${(i + 1).toString().padStart(2, '0')}`
+                        );
+                        this[g].selected = [];
+                        this.updateAvailableDisplay(g);
+                    });
+                }
+                StorageManager.saveData(this);
             },
 
             updateAvailableDisplay: function (group) {
                 const availableEl = document.getElementById(`available${group}`);
                 if (availableEl) {
-                    availableEl.textContent =
-                        `Nạn nhân tiếp theo: ${this[group].available.join(', ')}`;
+                    availableEl.innerHTML = `<strong><em>Nạn nhân tiếp theo:</em></strong> ${this[group].available.join(', ')}`;
                 }
             },
 
@@ -304,11 +658,9 @@ body {
                     return;
                 }
 
-                // Phát âm thanh spin
                 spinSound.currentTime = 0;
                 playSoundIfEnabled(spinSound);
 
-                // Hiệu ứng random
                 const randomAnimationEl = document.createElement('div');
                 randomAnimationEl.className = 'result-number';
                 randomAnimationEl.textContent = '...';
@@ -317,23 +669,17 @@ body {
                     : 'linear-gradient(135deg, #e74c3c, #c0392b)';
                 resultEl.appendChild(randomAnimationEl);
 
-                // Tạo hiệu ứng random
-                const randomNumbers = [];
                 const animationInterval = setInterval(() => {
                     randomAnimationEl.textContent = Math.floor(Math.random() * 100);
                 }, 50);
 
-                // Dừng và hiển thị kết quả sau 1.5 giây
                 setTimeout(() => {
                     clearInterval(animationInterval);
-                    resultEl.innerHTML = ''; // Xóa hiệu ứng random
+                    resultEl.innerHTML = '';
 
                     for (let i = 0; i < count; i++) {
-                        const randomIndex = Math.floor(
-                            Math.random() * this[group].available.length
-                        );
-                        const selectedNumber =
-                            this[group].available.splice(randomIndex, 1)[0];
+                        const randomIndex = Math.floor(Math.random() * this[group].available.length);
+                        const selectedNumber = this[group].available.splice(randomIndex, 1)[0];
 
                         const numberEl = document.createElement('div');
                         numberEl.className = 'result-number';
@@ -350,29 +696,29 @@ body {
                             numberEl.style.transition = 'all 0.5s ease';
                             numberEl.style.opacity = '1';
                             numberEl.style.transform = 'scale(1)';
-
-                            // Phát âm thanh chọn số
-                            selectSound.currentTime = 0;
-                            playSoundIfEnabled(selectSound);
                         }, i * 300);
 
                         this[group].selected.push(selectedNumber);
                     }
 
                     this.updateAvailableDisplay(group);
-                }, 1500);
+                    StorageManager.saveData(this);
+                }, 2000);
             },
 
             reset: function (group) {
                 if (confirm(`Bạn muốn reset nhóm ${group}?`)) {
                     document.getElementById(`result${group}`).innerHTML = '';
-                    this.init(group);
+                    this.init(group, true);
+                    StorageManager.saveData(this);
                 }
             }
         };
 
-        GroupManager.init('A');
-        GroupManager.init('B');
+        // Khởi tạo với dữ liệu từ localStorage
+        document.addEventListener('DOMContentLoaded', function () {
+            GroupManager.init();
+        });
 
         function selectNumbers(group, count) {
             GroupManager.selectNumbers(group, count);
@@ -383,26 +729,27 @@ body {
         }
 
         const fullscreenToggle = document.getElementById('fullscreenToggle');
+
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
-                } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                } else if (document.documentElement.mozRequestFullScreen) {
                     document.documentElement.mozRequestFullScreen();
-                } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                } else if (document.documentElement.webkitRequestFullscreen) {
                     document.documentElement.webkitRequestFullscreen();
-                } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                } else if (document.documentElement.msRequestFullscreen) {
                     document.documentElement.msRequestFullscreen();
                 }
                 fullscreenToggle.textContent = '🗝️';
             } else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) { // Firefox
+                } else if (document.mozCancelFullScreen) {
                     document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+                } else if (document.webkitExitFullscreen) {
                     document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { // IE/Edge
+                } else if (document.msExitFullscreen) {
                     document.msExitFullscreen();
                 }
                 fullscreenToggle.textContent = '🖥️';
@@ -418,11 +765,38 @@ body {
                 fullscreenToggle.textContent = '🗝️';
             }
         });
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
 
-        window.addEventListener('beforeunload', function (e) {
-            e.preventDefault();
-            e.returnValue = '⚠️ Toàn bộ dữ liệu sẽ bị mất nếu bạn tải lại trang. Bạn có chắc chắn muốn tiếp tục?';
-        });
+            // Random vị trí bắt đầu
+            snowflake.style.left = Math.random() * 100 + 'vw';
+
+            // Random kích thước
+            const size = (Math.random() * 1.5 + 0.5) + 'em';
+            snowflake.style.fontSize = size;
+
+            // Random thời gian rơi
+            const animationDuration = Math.random() * 3 + 2;
+            snowflake.style.animationDuration = animationDuration + 's';
+
+            document.body.appendChild(snowflake);
+
+            // Xóa snowflake sau khi animation kết thúc
+            setTimeout(() => {
+                snowflake.remove();
+            }, animationDuration * 1500);
+        }
+
+        function startSnowfall() {
+            // Tạo snowflake mới mỗi 100ms
+            setInterval(createSnowflake, 100);
+        }
+
+        // Bắt đầu hiệu ứng tuyết rơi khi trang load xong
+        window.addEventListener('load', startSnowfall);
+
     </script>
 </body>
 
