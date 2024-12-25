@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lucky Numbers Generator</title>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #818cf8;
+            --accent-color: #c7d2fe;
+            --background-color: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--background-color);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .group {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .group:hover {
+            transform: translateY(-5px);
+        }
+
+        .group-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .result-display {
+            min-height: 120px;
+            background: var(--background-color);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .controls {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            padding: 1rem;
+            border: none;
+            border-radius: 0.8rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .select-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .select-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .reset-btn {
+            grid-column: span 4;
+            background: #ef4444;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .remaining {
+            background: var(--background-color);
+            border-radius: 0.8rem;
+            padding: 1rem;
+            font-size: 0.9rem;
+            max-height: 120px;
+            overflow-y: auto;
+            color: var(--text-secondary);
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--background-color);
+        }
+
+        .remaining::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .remaining::-webkit-scrollbar-track {
+            background: var(--background-color);
+        }
+
+        .remaining::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .groups {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .reset-btn {
+                grid-column: span 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Lucky Numbers Generator</h1>
+            <p>Generate your lucky numbers with style</p>
+        </div>
+
+        <div class="groups">
+            <div class="group">
+                <h2 class="group-title">Group A</h2>
+                <div id="resultA" class="result-display"></div>
+                <div class="controls">
+                    <div class="buttons">
+                        <button class="select-btn" onclick="selectNumbers('A', 1)">Pick 1</button>
+                        <button class="select-btn" onclick="selectNumbers('A', 2)">Pick 2</button>
+                        <button class="select-btn" onclick="selectNumbers('A', 3)">Pick 3</button>
+                        <button class="select-btn" onclick="selectNumbers('A', 4)">Pick 4</button>
+                        <button class="reset-btn" onclick="resetGroup('A')">Reset Group</button>
+                    </div>
+                    <div id="remainingA" class="remaining"></div>
+                </div>
+            </div>
+
+            <div class="group">
+                <h2 class="group-title">Group B</h2>
+                <div id="resultB" class="result-display"></div>
+                <div class="controls">
+                    <div class="buttons">
+                        <button class="select-btn" onclick="selectNumbers('B', 1)">Pick 1</button>
+                        <button class="select-btn" onclick="selectNumbers('B', 2)">Pick 2</button>
+                        <button class="select-btn" onclick="selectNumbers('B', 3)">Pick 3</button>
+                        <button class="select-btn" onclick="selectNumbers('B', 4)">Pick 4</button>
+                        <button class="reset-btn" onclick="resetGroup('B')">Reset Group</button>
+                    </div>
+                    <div id="remainingB" class="remaining"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const groups = {
+            A: {
+                numbers: Array.from({length: 47}, (_, i) => i + 1)
+            },
+            B: {
+                numbers: Array.from({length: 47}, (_, i) => i + 1)
+            }
+        };
+
+        function updateRemaining(group) {
+            const remainingEl = document.getElementById(`remaining${group}`);
+            remainingEl.textContent = `Available numbers: ${groups[group].numbers.join(', ')}`;
+        }
+
+        function selectNumbers(group, count) {
+            const numbers = groups[group].numbers;
+            const resultEl = document.getElementById(`result${group}`);
+
+            if (numbers.length < count) {
+                alert('Not enough numbers remaining! Please reset the group.');
+                return;
+            }
+
+            resultEl.innerHTML = '';
+
+            for (let i = 0; i < count; i++) {
+                const randomIndex = Math.floor(Math.random() * numbers.length);
+                const selectedNumber = numbers.splice(randomIndex, 1)[0];
+
+                setTimeout(() => {
+                    const numberEl = document.createElement('div');
+                    numberEl.className = 'number';
+                    numberEl.textContent = selectedNumber;
+                    resultEl.appendChild(numberEl);
+                }, i * 200);
+            }
+
+            updateRemaining(group);
+        }
+
+        function resetGroup(group) {
+            groups[group].numbers = Array.from({length: 47}, (_, i) => i + 1);
+            const resultEl = document.getElementById(`result${group}`);
+            resultEl.innerHTML = '';
+            updateRemaining(group);
+        }
+
+        updateRemaining('A');
+        updateRemaining('B');
+    </script>
+</body>
+</html>
